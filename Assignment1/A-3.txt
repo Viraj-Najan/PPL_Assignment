@@ -1,0 +1,55 @@
+---------
+A-3 Loops
+---------
+
+        Compile the following program (file A-3.c) and observe the dumps.
+
+	Source file : A-3.c
+	Compilation : gcc-4.7.2 -c -fdump-tree-cfg A-3.c
+	View result : vi -O A-3.c A-3.c.*.cfg
+	Clear dumps : rm -f A-3.c.* A-3.o
+
+Program
+-------
+
+        int main()
+        {
+    	    int sum = 0;
+    	    int i, j;
+
+    	    while(sum < 100) {
+    		    sum = sum * 2;
+    	    }
+
+    	    for(i=0; i<25; i++) {
+    		    for(j=0; j<50; j++) {
+    			    sum = sum + i*j;
+    		    }
+    	    }
+        }
+
+Questions
+---------
+
+        1   Identify the basic blocks that correspond  to the while loop. How is
+            the GIMPLE for a while loop different from simple if-else jumps?
+
+        2   Identify the  basic blocks  for the nested  for-loop. You  should be
+            able  to identify  intializers, conditions  and increments  for each
+            loop as  well as  the shared  inner body.  Is there  really anything
+            special about a for-loop as compared to a while-loop?
+
+Answers : 
+	1.  BB 3 and 4 correspond to the while loop. In if-else statements control is unidirectional. 
+		it never goes backwork . but in case of while loop , control is passed back to the start 
+		of loop ( from BB 4 to BB 3). BB2 send control directly to BB 4 unconditionally  which is checking condition for while loop thus it avoids 1 iteration. This is different from the if-else jumps, which always seem
+	    to be conditional .
+
+	2.  BB 5:  Outer loop variable initialisation
+		BB 10: Outer loop conditional check
+		BB 6:  Inner loop variable initialisation
+		BB 8:  Inner loop conditional check
+		BB 7:  Inner loop body +  variable increment
+		BB 9:  Outer loop variable increment
+
+		There isn't any noticable diffference in for and while loop in cfg files . 

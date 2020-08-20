@@ -1,0 +1,28 @@
+Program
+-------
+        int main()
+        {
+            int a, b, c;
+            b = (a + c + b) * (c + a);
+            return b;
+        }
+Questions
+---------
+        1   How many  times is the expression  (a + c) computed  in the original
+            code (as seen in the SSA pass)? What about after the FRE pass?
+        2   Have  there been  any more  optimizations  after FRE?  How will  you
+            check?
+        3   Why did  we have  to put a  "return b" in  this assignment?  What if
+            "return b" is changed to "return 0"? Will it make any difference?
+
+Answers :
+
+	1   In SSA pass (a + c) is computed twice but in FRE pass it is calculated 
+	    only once even if order was different ,
+
+	2   We can check if there have been further optimisations by checking
+   	    B-4.c.*.optimized, which is the final file after optimisation. redundant 
+	    assignments have been eliminated in that file .
+
+	3.  If we don't return b nad instead return 0 , the above code will result in 
+	    elimination as dead code because it doesn't affect program result .

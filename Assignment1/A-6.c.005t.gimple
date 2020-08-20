@@ -1,0 +1,31 @@
+main ()
+{
+  int i;
+  int j;
+
+  i = 2;
+  goto <D.2321>;
+  <D.2320>:
+  j = 2;
+  goto <D.2319>;
+  <D.2318>:
+  _1 = i % j;
+  if (_1 == 0) goto <D.2324>; else goto <D.2325>;
+  <D.2324>:
+  goto <D.2317>;
+  <D.2325>:
+  j = j + 1;
+  <D.2319>:
+  if (j < i) goto <D.2318>; else goto <D.2317>;
+  <D.2317>:
+  if (i == j) goto <D.2326>; else goto <D.2327>;
+  <D.2326>:
+  printf ("%d \n", i);
+  <D.2327>:
+  i = i + 1;
+  <D.2321>:
+  if (i <= 100) goto <D.2320>; else goto <D.2322>;
+  <D.2322>:
+}
+
+
